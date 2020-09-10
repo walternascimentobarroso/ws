@@ -26,6 +26,8 @@ class WSController extends Controller
     public function upload()
     {
         ini_set("memory_limit", "2048M");
+        ini_set("post_max_size", "2048M");
+        ini_set("upload_max_filesize", "2048M");
         set_time_limit(0);
         $filename = $_FILES["file"]["name"];
         $arquivo = $_FILES["file"]["tmp_name"];
