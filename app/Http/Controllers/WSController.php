@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-class WSController
+class WSController extends Controller
 {
     public function upload()
     {
         $filename = $_FILES["file"]["name"];
         $arquivo = $_FILES["file"]["tmp_name"];
 
-        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+        $path = env('DESTINO_PATH');
         $destino = $path . basename($filename, '.zip');
 
         mkdir($destino, 0777); // Cria diretorio
@@ -19,6 +19,7 @@ class WSController
         $message = ($zip->extractTo($destino) == TRUE) ? 'Sucesso.' : 'Error.'; // Extrai o arquivo
         $zip->close(); // fecha o arquivo
         unlink($arquivo); // remove o arquivo
-        return response()->json(['success' => 'ok']);
+
+        return response()->json(['success' => $message]);
     }
 }
