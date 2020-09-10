@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 class WSController extends Controller
 {
+    public function hash()
+    {
+        $filename = $_FILES["file"]["name"];
+        $arquivo = $_FILES["file"]["tmp_name"];
+        $message = md5($filename);
+        unlink($arquivo); // remove o arquivo
+        return response()->json(['success' => 'ok', 'message' => $message]);
+    }
+
     public function upload()
     {
         $filename = $_FILES["file"]["name"];
@@ -20,6 +29,6 @@ class WSController extends Controller
         $zip->close(); // fecha o arquivo
         unlink($arquivo); // remove o arquivo
 
-        return response()->json(['success' => $message]);
+        return response()->json(['success' => 'ok', 'message' => $message]);
     }
 }
