@@ -13,8 +13,20 @@ class WSController extends Controller
         return response()->json(['success' => 'ok', 'message' => $message]);
     }
 
+    public function optimization()
+    {
+        // $script = env('DESTINO_SCRIPT');
+        // exec($script, $output);
+        exec('bash -c "exec nohup setsid $script > /dev/null 2>&1 &"');
+        $output = env('DESTINO_SCRIPT');
+
+        return response()->json(['success' => 'ok', 'message' => $output]);
+    }
+
     public function upload()
     {
+        ini_set("memory_limit", "2048M");
+        set_time_limit(0);
         $filename = $_FILES["file"]["name"];
         $arquivo = $_FILES["file"]["tmp_name"];
 
