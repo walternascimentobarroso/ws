@@ -43,4 +43,14 @@ class WSController extends Controller
 
         return response()->json(['success' => 'ok', 'message' => $message]);
     }
+
+    public function urlVideo()
+    {
+        $filename = env('DESTINO_POOLING_TXT');
+        $arquivo = fopen($filename, 'r'); // Abre o Arquvio no Modo r (para leitura)
+        while (!feof($arquivo)) { // Lê o conteúdo do arquivo
+            $output = fgets($arquivo); //Mostra uma linha do arquivo
+        }
+        return response()->json(['success' => 'ok', 'message' => $output]);
+    }
 }

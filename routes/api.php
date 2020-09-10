@@ -12,4 +12,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/ws_hash', [WSController::class, 'hash']);
 Route::post('/ws_optimization', [WSController::class, 'optimization']);
 Route::post('/ws_upload', [WSController::class, 'upload']);
-// Route::post('/ws_url_video', [WSController::class, 'urlVideo']);
+Route::get('/ws_url_video', [WSController::class, 'urlVideo']);
